@@ -1,0 +1,11 @@
+table_set_default ipv4_lpm _drop
+table_set_default forward _drop
+table_set_default clone_for_trace _no_op
+table_set_default drop_table _drop
+table_add clone_for_trace clone_pkt 1 => 250
+table_set_default set_clone _no_op
+table_add marking set_mark 1 =>
+table_set_default modification _no_op
+table_add modification inc_tag 1 0 0 =>
+table_add modification remove_self 1 1 1 =>
+table_set_default send_frame _drop
