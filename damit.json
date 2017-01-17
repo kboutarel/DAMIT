@@ -341,23 +341,25 @@
     "meter_arrays": [],
     "actions": [
         {
-            "name": "remove_self",
+            "name": "clone_pkt",
             "id": 0,
-            "runtime_data": [],
+            "runtime_data": [
+                {
+                    "name": "mirror_id",
+                    "bitwidth": 32
+                }
+            ],
             "primitives": [
                 {
-                    "op": "modify_field",
+                    "op": "clone_ingress_pkt_to_egress",
                     "parameters": [
                         {
-                            "type": "field",
-                            "value": [
-                                "tag",
-                                "itself"
-                            ]
+                            "type": "runtime_data",
+                            "value": 0
                         },
                         {
                             "type": "hexstr",
-                            "value": "0x0"
+                            "value": "0x1"
                         }
                     ]
                 }
@@ -499,8 +501,56 @@
             ]
         },
         {
-            "name": "set_dmac_then_increase",
+            "name": "config_action",
             "id": 4,
+            "runtime_data": [
+                {
+                    "name": "has_trace",
+                    "bitwidth": 1
+                }
+            ],
+            "primitives": [
+                {
+                    "op": "modify_field_rng_uniform",
+                    "parameters": [
+                        {
+                            "type": "field",
+                            "value": [
+                                "gmeta",
+                                "random"
+                            ]
+                        },
+                        {
+                            "type": "hexstr",
+                            "value": "0x0"
+                        },
+                        {
+                            "type": "hexstr",
+                            "value": "0x31"
+                        }
+                    ]
+                },
+                {
+                    "op": "modify_field",
+                    "parameters": [
+                        {
+                            "type": "field",
+                            "value": [
+                                "gmeta",
+                                "has_trace"
+                            ]
+                        },
+                        {
+                            "type": "runtime_data",
+                            "value": 0
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "set_dmac_then_increase",
+            "id": 5,
             "runtime_data": [
                 {
                     "name": "dmac",
@@ -587,29 +637,6 @@
             ]
         },
         {
-            "name": "set_mark",
-            "id": 5,
-            "runtime_data": [],
-            "primitives": [
-                {
-                    "op": "modify_field",
-                    "parameters": [
-                        {
-                            "type": "field",
-                            "value": [
-                                "tag",
-                                "mark"
-                            ]
-                        },
-                        {
-                            "type": "hexstr",
-                            "value": "0x1"
-                        }
-                    ]
-                }
-            ]
-        },
-        {
             "name": "inc_tag",
             "id": 6,
             "runtime_data": [],
@@ -633,48 +660,23 @@
             ]
         },
         {
-            "name": "config_action",
+            "name": "set_mark",
             "id": 7,
-            "runtime_data": [
-                {
-                    "name": "has_trace",
-                    "bitwidth": 1
-                }
-            ],
+            "runtime_data": [],
             "primitives": [
-                {
-                    "op": "modify_field_rng_uniform",
-                    "parameters": [
-                        {
-                            "type": "field",
-                            "value": [
-                                "gmeta",
-                                "random"
-                            ]
-                        },
-                        {
-                            "type": "hexstr",
-                            "value": "0x0"
-                        },
-                        {
-                            "type": "hexstr",
-                            "value": "0x31"
-                        }
-                    ]
-                },
                 {
                     "op": "modify_field",
                     "parameters": [
                         {
                             "type": "field",
                             "value": [
-                                "gmeta",
-                                "has_trace"
+                                "tag",
+                                "mark"
                             ]
                         },
                         {
-                            "type": "runtime_data",
-                            "value": 0
+                            "type": "hexstr",
+                            "value": "0x1"
                         }
                     ]
                 }
@@ -959,8 +961,31 @@
             ]
         },
         {
-            "name": "set_nhop",
+            "name": "remove_self",
             "id": 12,
+            "runtime_data": [],
+            "primitives": [
+                {
+                    "op": "modify_field",
+                    "parameters": [
+                        {
+                            "type": "field",
+                            "value": [
+                                "tag",
+                                "itself"
+                            ]
+                        },
+                        {
+                            "type": "hexstr",
+                            "value": "0x0"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "set_nhop",
+            "id": 13,
             "runtime_data": [
                 {
                     "name": "nhop_ipv4",
@@ -1017,31 +1042,6 @@
                         {
                             "type": "hexstr",
                             "value": "-0x1"
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "name": "clone_pkt",
-            "id": 13,
-            "runtime_data": [
-                {
-                    "name": "mirror_id",
-                    "bitwidth": 32
-                }
-            ],
-            "primitives": [
-                {
-                    "op": "clone_ingress_pkt_to_egress",
-                    "parameters": [
-                        {
-                            "type": "runtime_data",
-                            "value": 0
-                        },
-                        {
-                            "type": "hexstr",
-                            "value": "0x1"
                         }
                     ]
                 }

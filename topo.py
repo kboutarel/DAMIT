@@ -59,7 +59,7 @@ parser.add_argument('--default', help='Default commands to execute on each switc
 args = parser.parse_args()
 
 
-class SingleSwitchTopo(Topo):
+class DAMITTopo(Topo):
     "Single switch connected to n (< 256) hosts."
     def __init__(self, sw_path, json_path, thrift_port, pcap_dump, switches, outer_hosts, inner_hosts, links, **opts):
         # Initialize topology and default options
@@ -81,7 +81,7 @@ class SingleSwitchTopo(Topo):
             inner = self.addHost('i%d' % (i+1),
                                  ip = "10.0.%d.10/24" % i,
                                  mac = "00:04:00:00:00:%02x" % i)
-            
+
         for src,dst in links:
             self.addLink(src, dst)
             # If this is the link that is connected to an inner host
@@ -453,7 +453,7 @@ def configure_network(net, links, default=[]):
             node.setARP(intfs[0], intfs[1])
             node.setDefaultRoute("dev eth0 via %s" % intfs[0])
         elif isinstance(node, P4Switch):
-            updates = make_commands(node, intfs, default)       
+            updates = make_commands(node, intfs, default)
             table_updates(node, net.cli, updates)
 
 
@@ -466,7 +466,7 @@ def main():
     # Read default commands
     default = read_default(args.default)
 
-    topo = SingleSwitchTopo(args.behavioral_exe,
+    topo = DAMITTopo(args.behavioral_exe,
                             args.json,
                             args.thrift_port,
                             args.pcap_dump,
