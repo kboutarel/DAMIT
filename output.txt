@@ -1,24 +1,8 @@
 -----------------------
-Attack Path: c090020a <---> 0a00000a
-Total packets received: 24
-Total packets tagged: 5
-Percentage packets tagged: 0.21
-
-Complete path found:
-Border router: 78787807
-Path: ['c090020a', '78787807', '78787804', '78787802', '78787801', '0a00000a']
-Edges (src <---> dst : dist): 5
-c090020a <---> 78787807 : 4
-78787807 <---> 78787804 : 3
-78787804 <---> 78787802 : 2
-78787802 <---> 78787801 : 1
-78787801 <---> 0a00000a : 0
------------------------
------------------------
 Attack Path: c090010a <---> 0a00000a
-Total packets received: 38
-Total packets tagged: 7
-Percentage packets tagged: 0.18
+Total packets received: 29
+Total packets tagged: 4
+Percentage packets tagged: 0.14
 
 Complete path found:
 Border router: 78787806
@@ -32,9 +16,9 @@ c090010a <---> 78787806 : 4
 -----------------------
 -----------------------
 Attack Path: c090000a <---> 0a00000a
-Total packets received: 49
-Total packets tagged: 5
-Percentage packets tagged: 0.10
+Total packets received: 56
+Total packets tagged: 7
+Percentage packets tagged: 0.12
 
 Complete path found:
 Border router: 78787805
@@ -43,6 +27,22 @@ Edges (src <---> dst : dist): 5
 c090000a <---> 78787805 : 4
 78787805 <---> 78787803 : 3
 78787803 <---> 78787802 : 2
+78787802 <---> 78787801 : 1
+78787801 <---> 0a00000a : 0
+-----------------------
+-----------------------
+Attack Path: c090020a <---> 0a00000a
+Total packets received: 68
+Total packets tagged: 10
+Percentage packets tagged: 0.15
+
+Complete path found:
+Border router: 78787807
+Path: ['c090020a', '78787807', '78787804', '78787802', '78787801', '0a00000a']
+Edges (src <---> dst : dist): 5
+c090020a <---> 78787807 : 4
+78787807 <---> 78787804 : 3
+78787804 <---> 78787802 : 2
 78787802 <---> 78787801 : 1
 78787801 <---> 0a00000a : 0
 -----------------------
